@@ -1,64 +1,8 @@
-% !TEX options=--shell-escape
-\documentclass{article}
-\usepackage{tikz,amsthm,amsmath,cancel,pgfplots,animate,multirow,unicode-math,adjustbox,booktabs,array,pst-solides3d,pst-all,pst-3dplot,color,colortbl}
-\usepackage[margin=96pt]{geometry}
+\subsection{Домашнее задание 5}
 
-\usetikzlibrary{automata,positioning,calc,decorations.pathmorphing,patterns,external}
-\tikzexternalize[prefix=external/]
-
-\newtheorem{problem}{Задача}
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{definition}{Определение}
-\newtheorem{example}{Пример}
-\renewcommand*{\proofname}{Доказательство}
-\newcommand{\const}{\mathrm{const}}
-\DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\maj}{MAJ}
-\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
-\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
-\newcommand{\fr}[1]{\left\{#1\right\}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-
-\newcolumntype{o}{>{\columncolor{orange}}c}
-
-\makeatletter
-\newenvironment{sqcases}{%
-	\matrix@check\sqcases\env@sqcases
-}{%
-	\endarray\right.%
-}
-\def\env@sqcases{%
-	\let\@ifnextchar\new@ifnextchar
-	\left\lbrack
-	\def\arraystretch{1.2}%
-	\array{@{}l@{\quad}l@{}}%
-}
-\makeatother
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\setmainfont{CMU Serif}
-\widowpenalties 1 10000
-\raggedbottom
-
-\date{9 октября, 2022}
-\title{Дискретная математика \\ \Large Домашнее задание 5}
-\author{Иван Мачуговский}
-
-\AtBeginDocument{
-	\renewcommand{\setminus}{\mathbin{\backslash}}
-}
-
-\begin{document}
-	\maketitle
-
-	\begin{section}{Задача 1}
+	\begin{center}
+    \textbf{Задача 1}
+\end{center}
 		а)
 
 		\begin{equation*}
@@ -110,9 +54,11 @@
 		\end{equation*}
 
 		б) $F$ содержит функцию $\neg x$, поскольку она линейна и самодвойственна, а также $x \land y$, поскольку она монотонна и не самодвойственна. Эти две функции образуют полную систему, поэтому $F$ полна.
-	\end{section}
 
-	\begin{section}{Задача 2}
+
+	\begin{center}
+    \textbf{Задача 2}
+\end{center}
 		\begin{equation*}
 			x_1 \oplus x_2 \oplus x_3 = ((x_1 \lor x_2 \lor x_3) \land \neg (x_1 x_2 \lor x_1 x_3 \lor x_2 x_3)) \lor x_1 x_2 x_3,
 		\end{equation*}
@@ -130,9 +76,11 @@
 		\begin{equation*}
 			(a \land \neg b) \lor c = [\text{среди } x_1, x_2, x_3 \text{ 1 или 3 единицы}].
 		\end{equation*}
-	\end{section}
 
-	\begin{section}{Задача 3}
+
+	\begin{center}
+    \textbf{Задача 3}
+\end{center}
 		Да, это так.
 
 		Обозначим $n = 2022$.
@@ -184,9 +132,11 @@
 		\end{gather*}
 
 		Итак, мощность каждого из классов $T_0, T_1, L, S, M$ не превосходит половины мощности $P_2$, поэтому если выбрать более половины функций из $P_2$, полученная система $F$ не будет целиком включаться ни в один из этих классов, откуда по критерию Поста следует, что $F$ полна.
-	\end{section}
 
-	\begin{section}{Задача 4}
+
+	\begin{center}
+    \textbf{Задача 4}
+\end{center}
 		Проанализируем по отдельности принадлежность каждой из данных функций стандартным классам:
 
 		\begin{gather*}
@@ -209,13 +159,15 @@
 		\begin{equation*}
 			\{f_2, f_3\}, \{f_1, f_2, f_4\}.
 		\end{equation*}
-	\end{section}
 
-	\begin{section}{Задача 5}
+
+	\begin{center}
+    \textbf{Задача 5}
+\end{center}
 		Формально, мы хотим показать, что
 
 		\begin{equation*}
-			((0 \not\in [F]) \land (1 \not\in [F])) \iff ((F \subseteq T_0 \cap T_1) \lor F \subseteq S).
+			((0 \not\in [F]) \land (1 \not\in [F])) \Longleftrightarrow ((F \subseteq T_0 \cap T_1) \lor F \subseteq S).
 		\end{equation*}
 
 		Если правая сторона выполняется, то есть $F \subseteq T_0 \cap T_1$ или $F \subseteq S$, то $[F] \subseteq T_0 \cap T_q$ или $[F] \subseteq S$. Константы $0$ и $1$ не попадают ни в $S$, ни в $T_0 \cap T_1$, поскольку $0 \not\in T_1, 1 \not\in T_0$, поэтому они не попадают и в их подмножество $[F]$ в каждом из случаев, что и требовалось.
@@ -245,9 +197,11 @@
 		\end{equation*}
 
 		$y_1, \dots, y_n$ -- фиксированные значения, поэтому выражения $x \oplus y_i$ представляются в виде $x$ или $\neg x$ в зависимости от конкретных значений. $\neg x$ представимо в $[F]$, поэтому и эта функция представима в $[F]$, а следовательно, $[F]$ содержит константу, что и требовалось.
-	\end{section}
 
-	\begin{section}{Задача 6}
+
+	\begin{center}
+    \textbf{Задача 6}
+\end{center}
 		Базис мощности более $5$ невозможен. В самом деле, если $F$ -- некоторый базис $P_2$, то он содержит функции не из $T_0$, не из $T_1$, не из $L$, не из $M$ и не из $S$. Но подмножество из этих пяти функций (или менее, если среди них есть повторы) само по себе образует полную систему, поэтому мощность базиса не может превосходить $5$.
 
 		Более того, мощность базиса не может быть равна $5$: это бы требовало наличия пяти функций, каждая из которых не лежит ровно в одном из классов. Тогда найдется функция $f_1 \not\in T_1$, лежащая в $T_0, L, M, S$. Но если
@@ -283,9 +237,11 @@
 		\end{gather*}
 
 		Если убрать первую операцию, то оставшиеся три сохраняют единицу, если убрать вторую -- оставшиеся три сохраняют сохраняют нуль, если убрать третью -- оставшиеся три линейны, если убрать четвертую -- оставшиеся три монотонны, поэтому это базис.
-	\end{section}
 
-	\begin{section}{Задача 7}
+
+	\begin{center}
+    \textbf{Задача 7}
+\end{center}
         Функция голосования от трех аргументов - самодвойственная, а функции голосований от четного количество аргументов нет. Получается, что если мы имеем функции голосования от трех переменных мы никак из нее не соберем функцию которая имеет четное количество аргументов.
 
 Теперь, давайте докажем, что имея функцию от трех переменных мы сможем собрать любую функцию которая принимает не четное количество переменных. Докажем это по индукции. Базой у нас будет функция голосования от трех переменных.
@@ -293,5 +249,5 @@
 Переход. Допустим, мы научились получать функцию голосования от $n$ переменных, покажем, как получать функцию голосования от $n+2$ переменных. Я утверждаю, что функция голосования от $n+2$ может выглядеть так: $MAJ_{n+2} = MAJ_3(MAJ_n(x_1, x_2, x_3, ..., x_n),\\ MAJ_n(MAJ_n(x_2, ... x_{n+1}), MAJ_n(x_1, x_3, ... x_{n+1}), ..., MAJ_n(x_1, ..., x_{n-1}, x_{n+1})),\\
 MAJ_n(MAJ_n(x_2, ... x_{n+2}), MAJ_n(x_1, x_3, ... x_{n+2}), ..., MAJ_n(x_1, ..., x_{n-1}, x_{n+2})))$. Достаточно просто увидеть, что если разница между количество ноликов и единичек в переменных: $x_1, x_2, x_3, ..., x_n$ по модулю больше одного, т
 то эта функция всегда выведет правильный ответ. Остальные варианты можно просто перебрать, но я не вижу смысла это записывать.
-	\end{section}
-\end{document}
+
+

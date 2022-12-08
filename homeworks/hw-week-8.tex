@@ -1,76 +1,19 @@
-% !TEX options=--shell-escape
-\documentclass{article}
-\usepackage{tikz,amsthm,amsmath,cancel,pgfplots,animate,multirow,unicode-math,adjustbox,booktabs,array,pst-solides3d,pst-all,pst-3dplot,color,colortbl,sets,mathtools}
-\usepackage[margin=96pt]{geometry}
+\subsection{Домашнее задание 8}
 
-\usetikzlibrary{automata,positioning,calc,decorations.pathmorphing,patterns,external}
-\tikzexternalize[prefix=external/]
 
-\newtheorem{problem}{Задача}
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{definition}{Определение}
-\newtheorem{example}{Пример}
-\renewcommand*{\proofname}{Доказательство}
-\newcommand{\const}{\mathrm{const}}
-\DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\maj}{MAJ}
-\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
-\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
-\newcommand{\fr}[1]{\left\{#1\right\}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\continuum}{\mathfrak{c}}
-\DeclarePairedDelimiterX\set[1]\lbrace\rbrace{\def\given{\;\delimsize\vert\;}#1}
-
-\newcolumntype{o}{>{\columncolor{orange}}c}
-
-\makeatletter
-\newenvironment{sqcases}{%
-	\matrix@check\sqcases\env@sqcases
-}{%
-	\endarray\right.%
-}
-\def\env@sqcases{%
-	\let\@ifnextchar\new@ifnextchar
-	\left\lbrack
-	\def\arraystretch{1.2}%
-	\array{@{}l@{\quad}l@{}}%
-}
-\makeatother
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\setmainfont{CMU Serif}
-\widowpenalties 1 10000
-\raggedbottom
-
-\date{5 ноября, 2022}
-\title{Дискретная математика \\ \Large Домашнее задание 8}
-\author{Иван Мачуговский}
-
-\AtBeginDocument{
-	\renewcommand{\setminus}{\mathbin{\backslash}}
-}
-
-\begin{document}
-	\maketitle
-
-	\begin{section}{Задача 1}
+	\begin{center}
+    \textbf{Задача 1}
+\end{center}
 		Проверим, что выполняются три свойства отношения эквивалентности:
 
 		\begin{enumerate}
 			\item Рефлексивность:
 
 			\begin{equation*}
-				x \sim x \iff \begin{cases}
+				x \sim x \Longleftrightarrow \begin{cases}
 					x \le x \\
 					x \le x
-				\end{cases} \iff x \le x,
+				\end{cases} \Longleftrightarrow x \le x,
 			\end{equation*}
 
 			что верно в силу рефлексивности $\le$.
@@ -78,13 +21,13 @@
 			\item Симметричность:
 
 			\begin{equation*}
-				x \sim y \iff \begin{cases}
+				x \sim y \Longleftrightarrow \begin{cases}
 					x \le y \\
 					y \le x
-				\end{cases} \iff \begin{cases}
+				\end{cases} \Longleftrightarrow \begin{cases}
 					y \le x \\
 					x \le y
-				\end{cases} \iff y \sim x.
+				\end{cases} \Longleftrightarrow y \sim x.
 			\end{equation*}
 
 			\item Транзитивность:
@@ -107,9 +50,11 @@
 				\end{cases} \implies x \sim z.
 			\end{equation*}
 		\end{enumerate}
-	\end{section}
 
-	\begin{section}{Задача 2}
+
+	\begin{center}
+    \textbf{Задача 2}
+\end{center}
 		Всего (неупорядоченных) пар из $4$ элементов $6$. Для удобства обозначим эти четыре элемента $a, b, c, d$.
 
 		Оказывается, все семь вариантов возможны. Приведем примеры частичных порядков на каждый из вариантов ответа. Частичный порядок будем обозначать набором неравенств, например, $a \le b \le c, b \le d$, транзитивное замыкание которых дает сам порядок.
@@ -123,17 +68,23 @@
 			\item Пять несравнимых пар (все кроме упомянутой): $a \le b$.
 			\item Шесть несравнимых пар (все): $\emptyset$.
 		\end{itemize}
-	\end{section}
 
-	\begin{section}{Задача 3}
+
+	\begin{center}
+    \textbf{Задача 3}
+\end{center}
 		Предположим, существует изоморфизм $\varphi: \Z + \N \to \Z + \Z$. В $\Z + \N$ у $1_{\N}$ (единицы из $\N$) нет предыдущего элемента, поскольку его нет в $\N$, а если $x_{\Z} < 1_{\N}$, то и $(x+1)_{\Z} < 1_{\N}$. Но в $\Z + \Z$ у $\varphi(1_{\N})$, независимо из того, в каком из двух $\Z$ он находится, предыдущий элемент есть ($\varphi(1_{\N}) - 1$), поэтому порядки не изоморфны.
-	\end{section}
 
-	\begin{section}{Задача 4}
+
+	\begin{center}
+    \textbf{Задача 4}
+\end{center}
 		Предположим, изоморфизм существует. В $\N \times \Z$ любой отрезок, правый конец которого имеет вид $(1, x)$, конечен. Но для соответствующего ему элемента $(a, b)$ из $\Z \times \Z$ такое свойство не выполняется, потому что отрезок $[(a - 1, b), (a, b)]$ бесконечен, поэтому порядки не изоморфны.
-	\end{section}
 
-	\begin{section}{Задача 5}
+
+	\begin{center}
+    \textbf{Задача 5}
+\end{center}
 		\begin{lemma}
 			$\Q \cap (l, r) \sim \Q \cap (L, R)$ для любых рациональных $l < r, L < R$.
 		\end{lemma}
@@ -188,9 +139,11 @@
 
 			что завершает доказательство.
 		\end{proof}
-	\end{section}
 
-	\begin{section}{Задача 6}
+
+	\begin{center}
+    \textbf{Задача 6}
+\end{center}
 		Да, является.
 
 		Легко показать, что если множества $(A, \le_A), (B, \le_B)$ вполне упорядочены, то и их декартово произведение вполне упорядочено: минимальный элемент множества $C \subseteq A \times B, C \ne \emptyset$ имеет первую координату, равную минимуму первых координат по всем элементам из $C$, а вторую координату -- равную минимуму вторых координат по элементам из $C$, имеющих совпадающую первую координату.
@@ -210,13 +163,15 @@
 		Назовем это преобразование $\varphi$. Легко видеть, что оно инъективно, а также что
 
 		\begin{equation*}
-			\{x_n\} \le_{lex} \{y_n\} \iff \varphi(\{x_n\}) \le_\Gamma \varphi(\{y_n\}),
+			\{x_n\} \le_{lex} \{y_n\} \Longleftrightarrow \varphi(\{x_n\}) \le_\Gamma \varphi(\{y_n\}),
 		\end{equation*}
 
 		поэтому множество бесконечных невозрастающих последовательностей натуральных чисел с лексикографическим порядком изоморфно подмножеству $\Gamma$, а $\Gamma$ вполне упорядочено.
-	\end{section}
 
-	\begin{section}{Задача 7}
+
+	\begin{center}
+    \textbf{Задача 7}
+\end{center}
 		Предположим, что бесконечных цепей в множестве нет.
 
 		Утверждается, что при этом условии в любом бесконечном частично упорядоченном множестве $A$ найдется элемент $a \in A$, несравнимый с бесконечным числом элементов из $A$.
@@ -242,9 +197,11 @@
 		\end{equation*}
 
 		поэтому построенная последовательность -- бесконечная антицепь, что и требовалось.
-	\end{section}
 
-	\begin{section}{Задача 8}
+
+	\begin{center}
+    \textbf{Задача 8}
+\end{center}
 		Пусть дана какая-либо раскраска ребер описанного в условии графа. Изменим ориентацию синих ребер и забудем про цвета всех ребер. Легко видеть, что такое соответствие биективно. Тогда условие того, что для любых $x < y$ не существует одновренно красного и синего путей из $x$ в $y$ переходит в требование того, что не существует цикла, в котором ребра сначала все направлены слева направо, а потом справа налево. Назовем такой цикл \textit{обыкновенным} (я честно искал термин, еще не использующийся в теории графов для другой цели).
 
 		\begin{lemma}
@@ -264,5 +221,5 @@
 		В силу леммы раскраска хорошая тогда и только тогда, когда соответствующий бесцветный граф ацикличен. Но ацикличный полный граф -- ни что иное, как полный порядок, где каждое ребро идет, например, от меньшего элемента к большему, а полный порядок на $n$ элементах однозначно задается перестановкой из $n$ чисел, коих $n!$.
 
 		Ответ: $n!$.
-	\end{section}
-\end{document}
+
+

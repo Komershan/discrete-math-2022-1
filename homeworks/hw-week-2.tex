@@ -1,354 +1,303 @@
-% !TEX options=--shell-escape
-\documentclass{article}
-\usepackage{tikz,amsthm,amsmath,cancel,pgfplots,animate,multirow,unicode-math,adjustbox,booktabs,array,pst-solides3d,pst-all,pst-3dplot}
-\usepackage[margin=96pt]{geometry}
-
-\usetikzlibrary{automata,positioning,calc,decorations.pathmorphing,patterns,external}
-\tikzexternalize[prefix=external/]
-
-\newtheorem{problem}{Задача}
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{definition}{Определение}
-\newtheorem{example}{Пример}
-\renewcommand*{\proofname}{Доказательство}
-\newcommand{\const}{\mathrm{const}}
-\newcommand{\abs}[1]{\lvert#1\rvert}
-\newcommand{\floor}[1]{\lfloor#1\rfloor}
-\newcommand{\ceil}[1]{\lceil#1\rceil}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-
-\makeatletter
-\newenvironment{sqcases}{%
-	\matrix@check\sqcases\env@sqcases
-}{%
-	\endarray\right.%
-}
-\def\env@sqcases{%
-	\let\@ifnextchar\new@ifnextchar
-	\left\lbrack
-	\def\arraystretch{1.2}%
-	\array{@{}l@{\quad}l@{}}%
-}
-\makeatother
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\setmainfont{CMU Serif}
-\widowpenalties 1 10000
-\raggedbottom
-
-\date{15 сентября, 2022}
-\title{Дискретная математика \\ \Large Домашнее задание 2}
-\author{Иван Мачуговский}
-
-\AtBeginDocument{
-	\renewcommand{\setminus}{\mathbin{\backslash}}
-}
-
-\begin{document}
-	\maketitle
-
-	\begin{section}{Задача 1}
-		\begin{multline*}
-			(x, y) \in (A_1 \setminus A_2) \times (B_1 \setminus B_2)
-			\iff
-			\begin{cases}
-				x \in A_1 \setminus A_2 \\
-				y \in B_1 \setminus B_2
-			\end{cases}
-			\iff
-			\begin{cases}
-				x \in A_1, x \not\in A_2 \\
-				y \in B_1, y \not\in B_2
-			\end{cases}
-			\implies \\ \implies
-			\begin{cases}
-				x \in A_1, y \in B_1, \\
-				x \not\in A_2 \lor y \not\in B_2
-			\end{cases}
-			\iff
-			\begin{cases}
-				(x, y) \in A_1 \times B_1, \\
-				(x, y) \not\in A_2 \times B_2 \\
-			\end{cases}
-			\iff
-			(x, y) \in (A_1 \times B_1) \setminus (A_2 \times B_2).
-		\end{multline*}
-
-		Единственный не эквивалентный переход отмечен $\implies$. Для равенства множеств требуется, чтобы
-
-		\begin{equation*}
-			\begin{cases}
-				x \in A_1, x \not\in A_2 \\
-				y \in B_1, y \not\in B_2
-			\end{cases}
-			\iff
-			\begin{cases}
-				x \in A_1, y \in B_1, \\
-				x \not\in A_2 \lor y \not\in B_2
-			\end{cases}.
-		\end{equation*}
-
-		Слева направо импликация верна всегда, справа налево она верна при условии
-
-		\begin{gather*}
-			\forall x \in (A_1 \setminus A_2), y \in B_1: y \not\in B_2; \\
-			\forall x \in A_1, y \in (B_1 \setminus B_2): x \not\in A_2.
-		\end{gather*}
-
-		Первое выражение истинно либо если $A_1 \setminus A_2$ пусто (тривиальный случай), либо если $\forall y \in B_1: y \not\in B_2$, то есть $B_1 \cap B_2$ пусто. Аналогично со вторым выражением. Итого
-
-		\begin{equation*}
-			(A_1 \subseteq A_2 \lor B_1 \cap B_2 = \emptyset) \land (A_1 \cap A_2 = \emptyset \lor B_1 \subseteq B_2)
-		\end{equation*}
-	\end{section}
-
-	\begin{section}{Задача 2}
-		% Если $(x, y) \in R$, то $\frac{x}{y} > 0$, то есть $x$ и $y$ оба ненулевые и одинаковых знаков.
-
-		Отношение $R$ рефлексивно при $x \ne 0$, поэтому:
-
-		\begin{equation*}
-			(x, y) \in R
-			\implies
-			\begin{cases}
-				(x, y) \in R \\
-				x \ne 0
-			\end{cases}
-			\implies
-			\begin{cases}
-				(x, x) \in R \\
-				(x, y) \in R
-			\end{cases}
-			\implies
-			(x, y) \in R \circ R.
-		\end{equation*}
-
-		И обратно:
-
-		\begin{equation*}
-			(x, y) \in R \circ R
-			\implies
-			\exists z \in \R: \frac{x}{z} > 0, \frac{z}{y} > 0
-			\implies
-			\exists z \in \R: \frac{x}{\cancel{z}} \cdot \frac{\cancel{z}}{y} > 0
-			\implies
-			\frac{x}{y} > 0
-			\implies
-			(x, y) \in R.
-		\end{equation*}
-
-		Поэтому $R \circ R = R$.
-	\end{section}
-
-	\begin{section}{Задача 3}
-		Пусть для некоторой последовательности (индексируемой произвольными объектами) множеств $A_{\lambda \in \Lambda}$ и функций $F$, $G$ из последовательности множеств в множество верно
-
-		\begin{equation*}
-			F(A) \ne G(A).
-		\end{equation*}
-
-		Тогда из определения равенства множеств следует, что
-
-		\begin{equation*}
-			\exists x: (x \in F(A)) \ne (x \in G(A)).
-		\end{equation*}
-
-		Обозначим $B_\lambda = A_\lambda \cap \{x\}$, тогда утверждается, что
-
-		\begin{equation*}
-			(x \in F(B)) \ne (x \in G(B)) \implies F(B) \ne G(B).
-		\end{equation*}
-
-		В самом деле, для этого достаточно показать, что
-
-		\begin{equation*}
-			x \in F(B) \iff x \in F(A).
-		\end{equation*}
-
-		Это можно сделать по индукции по числу операций в $F$. База -- ноль операций, тогда
-
-		\begin{equation*}
-			x \in B_\lambda
-			\iff
-			x \in A_\lambda \cap \{x\}
-			\iff
-			\begin{cases}
-				x \in A_\lambda \\
-				x \in \{x\}
-			\end{cases}
-			\iff
-			x \in A_\lambda.
-		\end{equation*}
-
-		Шаг индукции:
-
-		\begin{enumerate}
-			\item Если $F(X) = F_a(X) \cap F_b(X)$, имеем
-
-			\begin{equation*}
-				x \in (F_a(A) \cap F_b(A))
-				\iff
-				\begin{cases}
-					x \in F_a(A) \\
-					x \in F_b(A)
-				\end{cases}
-				\iff
-				\begin{cases}
-					x \in F_a(B) \\
-					x \in F_b(B)
-				\end{cases}
-				\iff
-				x \in (F_a(B) \cap F_b(B)).
-			\end{equation*}
-
-			\item Если $F(X) = F_a(X) \cup F_b(X)$, имеем
-
-			\begin{equation*}
-				x \in (F_a(A) \cup F_b(A))
-				\iff
-				\begin{sqcases}
-					x \in F_a(A) \\
-					x \in F_b(A)
-				\end{sqcases}
-				\iff
-				\begin{sqcases}
-					x \in F_a(B) \\
-					x \in F_b(B)
-				\end{sqcases}
-				\iff
-				x \in (F_a(B) \cup F_b(B)).
-			\end{equation*}
-
-			\item Если $F(X) = F_a(X) \setminus F_b(X)$, имеем
-
-			\begin{equation*}
-				x \in (F_a(A) \setminus F_b(A))
-				\iff
-				\begin{cases}
-					x \in F_a(A) \\
-					x \not\in F_b(A)
-				\end{cases}
-				\iff
-				\begin{cases}
-					x \in F_a(B) \\
-					x \not\in F_b(B)
-				\end{cases}
-				\iff
-				x \in (F_a(B) \setminus F_b(B)).
-			\end{equation*}
-		\end{enumerate}
-	\end{section}
-
-	\begin{section}{Задача 4}
-		Т.к. $f(x) \in A \iff x \in f^{-1}(A)$ по определению прообраза множества, имеем
-
-		\begin{multline*}
-			x \in f^{-1}(A \triangle B)
-			\iff
-			f(x) \in A \triangle B
-			\iff
-			\begin{sqcases}
-				\begin{cases}
-					f(x) \in A \\
-					f(x) \not\in B
-				\end{cases} \\
-				\begin{cases}
-					f(x) \not\in A \\
-					f(x) \in B
-				\end{cases}
-			\end{sqcases}
-			\iff \\ \iff
-			\begin{sqcases}
-				\begin{cases}
-					x \in f^{-1}(A) \\
-					x \not\in f^{-1}(B)
-				\end{cases} \\
-				\begin{cases}
-					x \not\in f^{-1}(A) \\
-					x \in f^{-1}(B)
-				\end{cases}
-			\end{sqcases}
-			\iff
-			x \in f^{-1}(A) \triangle f^{-1}(B),
-		\end{multline*}
-
-		поэтому оба знака корректны.
-	\end{section}
-
-	\begin{section}{Задача 5}
-		Покажем, что $f^n$ (под возведением функции в степень здесь понимается композиция ее с самой собой $n$ раз) на отрезке $[0; 1]$ представляет из себя последовательность из $2^n$ отрезков монотонности, где на концах каждого промежутка одно из значений равно $0$, а другое -- $1$.
-
-		Доказательство проведем по индукции. База: $n = 1$, тогда $f^1 = f$ действительно удовлетворяет условию, поскольку $f$ -- парабола с ветвями вниз и вершиной $(1/2, 1)$, а также $f(0) = f(1) = 0$.
-
-		Для перехода от $n$ к $n + 1$ нам понадобится очевидная
-
-		\begin{lemma}
-			Если некоторая функция $g: [0; 1] \to \mathbb{R}$ имеет промежуток монотонности $[a, b]$, а функция $h: [l, r] \to [0; 1]$ сюръективна и монотонно возрастает, то $g \circ h$ имеет промежуток монотонности $[h^{-1}(a), h^{-1}(b)]$ с теми же значениями в крайних точках.
-		\end{lemma}
-
-		Следовательно, если функция $f^n$ имела промежуток монотонности $[a, b]$, то, подставляя в лемму $g = f^n$, $h: [0; 1/2] \to [0; 1] = 4x(1-x)$, получаем, что $f^{n+1}$ имеет промежуток монотонности $[h^{-1}(a), h^{-1}(b)]$, причем один из концов сохраняется единичным, другой -- нулевым. Применяя эту лемму ко всем $2^n$ промежуткам монотонности $f^n$, получаем, что $f^{n+1}$ имеет $2^n$ промежутков монотонности на $[0; 1/2]$.
-
-		Аналогично можно показать, что на отрезке $[1/2; 1]$ функция $f^{n+1}$ также имеет $2^n$ промежутков монотонности. Итого промежутков монотонности $2^{n+1}$. \qed
-
-		Итак, рассмотрим произвольный промежуток монотонности $[a; b]$ функции $g = f^{2022}$. Как было показано, $g(a) = 0, g(b) = 1$ либо $g(a) = 1, g(b) = 0$. Рассмотрим первый случай, второй рассматривается аналогично. Если $g(a) = 0$, то $a - g(a) \ge 0$; если $g(b) = 1$, то $b - g(b) \le 0$. $x - g(x)$ -- непрерывная функция, поэтому найдется $x \in [a; b], g(x) - x = 0$, следовательно, $x$ -- одно из искомых решений. Легко видеть, что никаким двум промежуткам не может соответствовать один и тот же $x$, потому что если это так, то $x = a$ либо $x = b$, откуда $f(x) \in \{0, 1\}$, откуда $x \in \{0, 1\}$, но промежуток с концом $0$ единственен, как и промежуток с концом $1$. Итак, каждому промежутку монотонности соответствует свое решение (не обязательно единственное), а значит, решений как минимум $2^{2022}$.
-
-		С другой стороны, $f^n(x)$ -- многочлен степени $2^n$, поскольку $\deg f^1(x) = 2$ и
-
-		\begin{equation*}
-			\deg f^{n+1}(x) = \deg 4 f^n(x) (1 - f^n(x)) = \deg (f^n(x))^2 = 2 \deg f^n(x).
-		\end{equation*}
-
-		Следовательно, $f^{2022}(x) - x$ может иметь не более $2^{2022}$ корней.
-
-		Итак, решений не менее $2^{2022}$ и не более $2^{2022}$, значит, их ровно столько.
-	\end{section}
-
-	\begin{section}{Задача 6}
-		Нет, докажем это от противного. Предположим, существует функция $f: \N \to \N$, удовлетворяющая условию $f^2(n) = n + 1$ (здесь под $f^k$ понимается композиция функции с самой собой $k$ раз).
-
-		Отсюда следует, что $f^{2k}(n) = n + k$.
-
-		Обозначим $a = f(1)$. Тогда
-
-		\begin{align*}
-			f^{2a-1}(1) &= f^{2(a-1)}(a) = a + (a - 1) = 2a - 1; \\
-			f^{2a-1}(1) &= f(f^{2(a-1)}(1)) = f(1 + (a - 1)) = f(a) = f^2(1) = 2.
-		\end{align*}
-
-		Но $2a - 1$ и $2$ имеют разную четность и потому не могут быть равны. \qed
-	\end{section}
-
-	\begin{section}{Задача 7}
-		Обозначим за $\{a_n\}$ последовательность всех чисел $a \in \N$, удовлетворяющих $\sqrt{a} \not\in \N$, упорядоченную по возрастанию.
-
-		Тогда каждое натуральное число $n$, кроме единицы, представимо в виде $a_i^{2^k}$ для некоторых $i, k$. В самом деле, если $n$ -- минимальное непредставимое число, то возможны два случая. Если $\sqrt{n} \not\in \N$, то $n$ есть в последовательности $a$, и подставив $k = 0$, мы получаем требуемое. Если же $\sqrt{n} \in \N$, то в силу минимальности $n$ число $\sqrt{n}$ представимо как $a_i^{2^k}$, тогда $n = a_i^{2^{k+1}}$.
-
-		Легко видеть и обратное: каждое число, кроме единицы, представимо в таком виде единственным образом, который можно выразить конструктивно, итеративно беря квадратный корень от $n$, пока он представим в натуральных числах. Единица же не представима никак.
-
-		Тогда определим $f$ следующим образом:
-
-		\begin{align*}
-			f(1) &= 1, \\
-			f \left( a_{2i-1}^{2^k} \right) &= a_{2i}^{2^k}, \\
-			f \left( a_{2i}^{2^k} \right) &= a_{2i-1}^{2^{k+1}}.
-		\end{align*}
-
-		Тогда
-
-		\begin{equation*}
-			(f \circ f)(x) = \begin{cases}
-				1, & \text{если } x = 1 \\
-				a_{2i-1}^{2^{k+1}}, & \text{если } x = a_{2i-1}^{2^k} \\
-				a_{2i}^{2^{k+1}}, & \text{если } x = a_{2i}^{2^k}
-			\end{cases},
-		\end{equation*}
-
-		то есть $(f \circ f)(x) = x^2$. \qed
-	\end{section}
-\end{document}
+\subsection{Домашнее задание 2}
+
+\begin{center}
+    \textbf{Задача 1}
+\end{center}
+\begin{multline*}
+    (x, y) \in (A_1 \setminus A_2) \times (B_1 \setminus B_2)
+    \Longleftrightarrow
+    \begin{cases}
+        x \in A_1 \setminus A_2 \\
+        y \in B_1 \setminus B_2
+    \end{cases}
+    \Longleftrightarrow
+    \begin{cases}
+        x \in A_1, x \not\in A_2 \\
+        y \in B_1, y \not\in B_2
+    \end{cases}
+    \implies \\ \implies
+    \begin{cases}
+        x \in A_1, y \in B_1, \\
+        x \not\in A_2 \lor y \not\in B_2
+    \end{cases}
+    \Longleftrightarrow
+    \begin{cases}
+        (x, y) \in A_1 \times B_1, \\
+        (x, y) \not\in A_2 \times B_2 \\
+    \end{cases}
+    \Longleftrightarrow
+    (x, y) \in (A_1 \times B_1) \setminus (A_2 \times B_2).
+\end{multline*}
+
+Единственный не эквивалентный переход отмечен $\implies$. Для равенства множеств требуется, чтобы
+
+\begin{equation*}
+    \begin{cases}
+        x \in A_1, x \not\in A_2 \\
+        y \in B_1, y \not\in B_2
+    \end{cases}
+    \Longleftrightarrow
+    \begin{cases}
+        x \in A_1, y \in B_1, \\
+        x \not\in A_2 \lor y \not\in B_2
+    \end{cases}.
+\end{equation*}
+
+Слева направо импликация верна всегда, справа налево она верна при условии
+
+\begin{gather*}
+    \forall x \in (A_1 \setminus A_2), y \in B_1: y \not\in B_2; \\
+    \forall x \in A_1, y \in (B_1 \setminus B_2): x \not\in A_2.
+\end{gather*}
+
+Первое выражение истинно либо если $A_1 \setminus A_2$ пусто (тривиальный случай), либо если $\forall y \in B_1: y \not\in B_2$, то есть $B_1 \cap B_2$ пусто. Аналогично со вторым выражением. Итого
+
+\begin{equation*}
+    (A_1 \subseteq A_2 \lor B_1 \cap B_2 = \emptyset) \land (A_1 \cap A_2 = \emptyset \lor B_1 \subseteq B_2)
+\end{equation*}
+
+\begin{center}
+    \textbf{Задача 2}
+\end{center}        % Если $(x, y) \in R$, то $\frac{x}{y} > 0$, то есть $x$ и $y$ оба ненулевые и одинаковых знаков.
+
+Отношение $R$ рефлексивно при $x \ne 0$, поэтому:
+
+\begin{equation*}
+    (x, y) \in R
+    \implies
+    \begin{cases}
+        (x, y) \in R \\
+        x \ne 0
+    \end{cases}
+    \implies
+    \begin{cases}
+        (x, x) \in R \\
+        (x, y) \in R
+    \end{cases}
+    \implies
+    (x, y) \in R \circ R.
+\end{equation*}
+
+И обратно:
+
+\begin{equation*}
+    (x, y) \in R \circ R
+    \implies
+    \exists z \in \mathbb{R}: \frac{x}{z} > 0, \frac{z}{y} > 0
+    \implies
+    \exists z \in \mathbb{R}: \frac{x}{\cancel{z}} \cdot \frac{\cancel{z}}{y} > 0
+    \implies
+    \frac{x}{y} > 0
+    \implies
+    (x, y) \in R.
+\end{equation*}
+
+Поэтому $R \circ R = R$.
+
+\begin{center}
+    \textbf{Задача 3}
+\end{center}
+Пусть для некоторой последовательности (индексируемой произвольными объектами) множеств $A_{\lambda \in \Lambda}$ и функций $F$, $G$ из последовательности множеств в множество верно
+
+\begin{equation*}
+    F(A) \ne G(A).
+\end{equation*}
+
+Тогда из определения равенства множеств следует, что
+
+\begin{equation*}
+    \exists x: (x \in F(A)) \ne (x \in G(A)).
+\end{equation*}
+
+Обозначим $B_\lambda = A_\lambda \cap \{x\}$, тогда утверждается, что
+
+\begin{equation*}
+    (x \in F(B)) \ne (x \in G(B)) \implies F(B) \ne G(B).
+\end{equation*}
+
+В самом деле, для этого достаточно показать, что
+
+\begin{equation*}
+    x \in F(B) \Longleftrightarrow x \in F(A).
+\end{equation*}
+
+Это можно сделать по индукции по числу операций в $F$. База -- ноль операций, тогда
+
+\begin{equation*}
+    x \in B_\lambda
+    \Longleftrightarrow
+    x \in A_\lambda \cap \{x\}
+    \Longleftrightarrow
+    \begin{cases}
+        x \in A_\lambda \\
+        x \in \{x\}
+    \end{cases}
+    \Longleftrightarrow
+    x \in A_\lambda.
+\end{equation*}
+
+Шаг индукции:
+
+\begin{enumerate}
+    \item Если $F(X) = F_a(X) \cap F_b(X)$, имеем
+
+    \begin{equation*}
+        x \in (F_a(A) \cap F_b(A))
+        \Longleftrightarrow
+        \begin{cases}
+            x \in F_a(A) \\
+            x \in F_b(A)
+        \end{cases}
+        \Longleftrightarrow
+        \begin{cases}
+            x \in F_a(B) \\
+            x \in F_b(B)
+        \end{cases}
+        \Longleftrightarrow
+        x \in (F_a(B) \cap F_b(B)).
+    \end{equation*}
+
+    \item Если $F(X) = F_a(X) \cup F_b(X)$, имеем
+
+    \begin{equation*}
+        x \in (F_a(A) \cup F_b(A))
+        \Longleftrightarrow
+        \begin{sqcases}
+            x \in F_a(A) \\
+            x \in F_b(A)
+        \end{sqcases}
+        \Longleftrightarrow
+        \begin{sqcases}
+            x \in F_a(B) \\
+            x \in F_b(B)
+        \end{sqcases}
+        \Longleftrightarrow
+        x \in (F_a(B) \cup F_b(B)).
+    \end{equation*}
+
+    \item Если $F(X) = F_a(X) \setminus F_b(X)$, имеем
+
+    \begin{equation*}
+        x \in (F_a(A) \setminus F_b(A))
+        \Longleftrightarrow
+        \begin{cases}
+            x \in F_a(A) \\
+            x \not\in F_b(A)
+        \end{cases}
+        \Longleftrightarrow
+        \begin{cases}
+            x \in F_a(B) \\
+            x \not\in F_b(B)
+        \end{cases}
+        \Longleftrightarrow
+        x \in (F_a(B) \setminus F_b(B)).
+    \end{equation*}
+\end{enumerate}
+
+\begin{center}
+    \textbf{Задача 4}
+\end{center}
+Т.к. $f(x) \in A \Longleftrightarrow x \in f^{-1}(A)$ по определению прообраза множества, имеем
+
+\begin{multline*}
+    x \in f^{-1}(A \triangle B)
+    \Longleftrightarrow
+    f(x) \in A \triangle B
+    \Longleftrightarrow
+    \begin{sqcases}
+        \begin{cases}
+            f(x) \in A \\
+            f(x) \not\in B
+        \end{cases} \\
+        \begin{cases}
+            f(x) \not\in A \\
+            f(x) \in B
+        \end{cases}
+    \end{sqcases}
+    \Longleftrightarrow \\ \Longleftrightarrow
+    \begin{sqcases}
+        \begin{cases}
+            x \in f^{-1}(A) \\
+            x \not\in f^{-1}(B)
+        \end{cases} \\
+        \begin{cases}
+            x \not\in f^{-1}(A) \\
+            x \in f^{-1}(B)
+        \end{cases}
+    \end{sqcases}
+    \Longleftrightarrow
+    x \in f^{-1}(A) \triangle f^{-1}(B),
+\end{multline*}
+
+поэтому оба знака корректны.
+
+\begin{center}
+    \textbf{Задача 5}
+\end{center}        Покажем, что $f^n$ (под возведением функции в степень здесь понимается композиция ее с самой собой $n$ раз) на отрезке $[0; 1]$ представляет из себя последовательность из $2^n$ отрезков монотонности, где на концах каждого промежутка одно из значений равно $0$, а другое -- $1$.
+
+Доказательство проведем по индукции. База: $n = 1$, тогда $f^1 = f$ действительно удовлетворяет условию, поскольку $f$ -- парабола с ветвями вниз и вершиной $(1/2, 1)$, а также $f(0) = f(1) = 0$.
+
+Для перехода от $n$ к $n + 1$ нам понадобится очевидная
+
+\begin{lemma}
+    Если некоторая функция $g: [0; 1] \to \mathbb{R}$ имеет промежуток монотонности $[a, b]$, а функция $h: [l, r] \to [0; 1]$ сюръективна и монотонно возрастает, то $g \circ h$ имеет промежуток монотонности $[h^{-1}(a), h^{-1}(b)]$ с теми же значениями в крайних точках.
+\end{lemma}
+
+Следовательно, если функция $f^n$ имела промежуток монотонности $[a, b]$, то, подставляя в лемму $g = f^n$, $h: [0; 1/2] \to [0; 1] = 4x(1-x)$, получаем, что $f^{n+1}$ имеет промежуток монотонности $[h^{-1}(a), h^{-1}(b)]$, причем один из концов сохраняется единичным, другой -- нулевым. Применяя эту лемму ко всем $2^n$ промежуткам монотонности $f^n$, получаем, что $f^{n+1}$ имеет $2^n$ промежутков монотонности на $[0; 1/2]$.
+
+Аналогично можно показать, что на отрезке $[1/2; 1]$ функция $f^{n+1}$ также имеет $2^n$ промежутков монотонности. Итого промежутков монотонности $2^{n+1}$. \qed
+
+Итак, рассмотрим произвольный промежуток монотонности $[a; b]$ функции $g = f^{2022}$. Как было показано, $g(a) = 0, g(b) = 1$ либо $g(a) = 1, g(b) = 0$. Рассмотрим первый случай, второй рассматривается аналогично. Если $g(a) = 0$, то $a - g(a) \ge 0$; если $g(b) = 1$, то $b - g(b) \le 0$. $x - g(x)$ -- непрерывная функция, поэтому найдется $x \in [a; b], g(x) - x = 0$, следовательно, $x$ -- одно из искомых решений. Легко видеть, что никаким двум промежуткам не может соответствовать один и тот же $x$, потому что если это так, то $x = a$ либо $x = b$, откуда $f(x) \in \{0, 1\}$, откуда $x \in \{0, 1\}$, но промежуток с концом $0$ единственен, как и промежуток с концом $1$. Итак, каждому промежутку монотонности соответствует свое решение (не обязательно единственное), а значит, решений как минимум $2^{2022}$.
+
+С другой стороны, $f^n(x)$ -- многочлен степени $2^n$, поскольку $\deg f^1(x) = 2$ и
+
+\begin{equation*}
+    \deg f^{n+1}(x) = \deg 4 f^n(x) (1 - f^n(x)) = \deg (f^n(x))^2 = 2 \deg f^n(x).
+\end{equation*}
+
+Следовательно, $f^{2022}(x) - x$ может иметь не более $2^{2022}$ корней.
+
+Итак, решений не менее $2^{2022}$ и не более $2^{2022}$, значит, их ровно столько.
+
+\begin{center}
+    \textbf{Задача 6}
+\end{center}        Нет, докажем это от противного. Предположим, существует функция $f: \N \to \N$, удовлетворяющая условию $f^2(n) = n + 1$ (здесь под $f^k$ понимается композиция функции с самой собой $k$ раз).
+
+Отсюда следует, что $f^{2k}(n) = n + k$.
+
+Обозначим $a = f(1)$. Тогда
+
+\begin{align*}
+    f^{2a-1}(1) &= f^{2(a-1)}(a) = a + (a - 1) = 2a - 1; \\
+    f^{2a-1}(1) &= f(f^{2(a-1)}(1)) = f(1 + (a - 1)) = f(a) = f^2(1) = 2.
+\end{align*}
+
+Но $2a - 1$ и $2$ имеют разную четность и потому не могут быть равны. \qed
+
+\begin{center}
+    \textbf{Задача 7}
+\end{center}        Обозначим за $\{a_n\}$ последовательность всех чисел $a \in \N$, удовлетворяющих $\sqrt{a} \not\in \N$, упорядоченную по возрастанию.
+
+Тогда каждое натуральное число $n$, кроме единицы, представимо в виде $a_i^{2^k}$ для некоторых $i, k$. В самом деле, если $n$ -- минимальное непредставимое число, то возможны два случая. Если $\sqrt{n} \not\in \N$, то $n$ есть в последовательности $a$, и подставив $k = 0$, мы получаем требуемое. Если же $\sqrt{n} \in \N$, то в силу минимальности $n$ число $\sqrt{n}$ представимо как $a_i^{2^k}$, тогда $n = a_i^{2^{k+1}}$.
+
+Легко видеть и обратное: каждое число, кроме единицы, представимо в таком виде единственным образом, который можно выразить конструктивно, итеративно беря квадратный корень от $n$, пока он представим в натуральных числах. Единица же не представима никак.
+
+Тогда определим $f$ следующим образом:
+
+\begin{align*}
+    f(1) &= 1, \\
+    f \left( a_{2i-1}^{2^k} \right) &= a_{2i}^{2^k}, \\
+    f \left( a_{2i}^{2^k} \right) &= a_{2i-1}^{2^{k+1}}.
+\end{align*}
+
+Тогда
+
+\begin{equation*}
+    (f \circ f)(x) = \begin{cases}
+                         1, & \text{если } x = 1 \\
+                         a_{2i-1}^{2^{k+1}}, & \text{если } x = a_{2i-1}^{2^k} \\
+                         a_{2i}^{2^{k+1}}, & \text{если } x = a_{2i}^{2^k}
+    \end{cases},
+\end{equation*}
+
+то есть $(f \circ f)(x) = x^2$. \qed

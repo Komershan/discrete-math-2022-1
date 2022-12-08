@@ -1,63 +1,9 @@
-% !TEX options=--shell-escape
-\documentclass{article}
-\usepackage{tikz,amsthm,amsmath,cancel,pgfplots,animate,multirow,unicode-math,adjustbox,booktabs,array,pst-solides3d,pst-all,pst-3dplot,color,colortbl}
-\usepackage[margin=96pt]{geometry}
+\subsection{Домашнее задание 4}
 
-\usetikzlibrary{automata,positioning,calc,decorations.pathmorphing,patterns,external}
-\tikzexternalize[prefix=external/]
 
-\newtheorem{problem}{Задача}
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{definition}{Определение}
-\newtheorem{example}{Пример}
-\renewcommand*{\proofname}{Доказательство}
-\newcommand{\const}{\mathrm{const}}
-\DeclareMathOperator{\ord}{ord}
-\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
-\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
-\newcommand{\fr}[1]{\left\{#1\right\}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-
-\newcolumntype{o}{>{\columncolor{orange}}c}
-
-\makeatletter
-\newenvironment{sqcases}{%
-	\matrix@check\sqcases\env@sqcases
-}{%
-	\endarray\right.%
-}
-\def\env@sqcases{%
-	\let\@ifnextchar\new@ifnextchar
-	\left\lbrack
-	\def\arraystretch{1.2}%
-	\array{@{}l@{\quad}l@{}}%
-}
-\makeatother
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\setmainfont{CMU Serif}
-\widowpenalties 1 10000
-\raggedbottom
-
-\date{3 октября, 2022}
-\title{Дискретная математика \\ \Large Домашнее задание 4}
-\author{Иван Мачуговский}
-
-\AtBeginDocument{
-	\renewcommand{\setminus}{\mathbin{\backslash}}
-}
-
-\begin{document}
-	\maketitle
-
-	\begin{section}{Задача 1}
+	\begin{center}
+    \textbf{Задача 1}
+\end{center}
 		Задачу можно проинтерпретировать двумя способами, поэтому приведем два ответа.
 
 		Если под разделением академической нагрузки подразумевается разделение часов между преподавателями, где конкретные группы, составляющие эти часы, значения не имеют, то искомое число способов -- это количество способов разделить число $9$ на сумму шести натуральных слагаемых.
@@ -93,9 +39,11 @@
 		\end{enumerate}
 
 		Итого ответ $90720 + 907200 + 907200 = 1905120$.
-	\end{section}
 
-	\begin{section}{Задача 2}
+
+	\begin{center}
+    \textbf{Задача 2}
+\end{center}
 		Пусть из всех переменных ровно $m$ -- единицы. При $m = 0$ искомое выражение равно $0$. Если же $m \ge 1$, то
 
 		\begin{equation*}
@@ -126,9 +74,11 @@
 		При $m \ge 2$ правая часть четна, значит, искомое выражение равно нулю.
 
 		Ответ: если ровно один из $x_i$ равен единице, значение равно $1$, иначе оно равно $0$.
-	\end{section}
 
-	\begin{section}{Задача 3}
+
+	\begin{center}
+    \textbf{Задача 3}
+\end{center}
 		Найдем в данном многочлене Жегалкина $P$ любой моном максимальной степени. Без ограничения общности будем считать, что переменные пронумерованы так, что этот моном имеет вид $x_1 x_2 \dots x_k$.
 
 		Покажем, что существует (как минимум) $2^{n-k}$ наборов переменных, на которых $P$ принимает значение $0$ (если требуется, чтобы значение было $1$, изначально проксорим многочлен с единицей).
@@ -136,16 +86,20 @@
 		Переменные с $x_{k+1}$ по $x_n$ суммарно принимают $2^{n-k}$ вариантов. Для каждого варианта выберем значения переменных $x_1, x_2, \dots, x_k$ так, чтобы многочлен $P$ принимал значение $0$, следующим образом.
 
 		Пусть $x_{k+1}, x_{k+2}, \dots, x_n$ фиксированы. Подставляя их значения в $P$ и приводя подобные слагаемые, получаем новый многочлен Жегалкина $Q$ от переменных $x_1, x_2, \dots, x_k$. Поскольку моном $x_1 x_2 \dots x_k$ был в $P$, а никакого другого монома, содержащего все эти переменные одновременно, там не было (ведь $k$ -- максимальная степень), то в $Q$ соответствующий моном сохранится. Тогда обязан существовать набор переменных $x_1, x_2, \dots, x_k$, при котором $Q$ обращается в нуль. В самом деле, если $Q$ равен единице при всех значениях переменных, то существуют два различных многочлена Жегалкина, задающих единицу: $1$ и собственно $Q$ (а $1 \ne Q$, потому что $Q$ содержит моном $x_1 x_2 \dots x_k$), но многочлен Жегалкина для любой данной функции уникален -- противоречие.
-	\end{section}
 
-	\begin{section}{Задача 4}
+
+	\begin{center}
+    \textbf{Задача 4}
+\end{center}
 		\begin{multline*}
 			x \lor (\neg y \land \neg z) \lor \neg w = \neg (\neg x \land \neg (\neg y \land \neg z) \land w) = \neg (\neg x \land (y \lor z) \land w) = \\
 			= (x \oplus 1)(y \oplus z \oplus yz)w \oplus 1 = xyw \oplus xzw \oplus xyzw \oplus yw \oplus zw \oplus yzw \oplus 1.
 		\end{multline*}
-	\end{section}
 
-	\begin{section}{Задача 5}
+
+	\begin{center}
+    \textbf{Задача 5}
+\end{center}
 		а) Нет: $\lor$ и $\rightarrow$ сохраняют единицу, то есть $1 \lor 1 = 1$ и $1 \rightarrow 1 = 1$. Следовательно, если все переменные единичны, то и любое выражение, составленное из $\lor$ и $\rightarrow$, будет единично, следовательно, некоторые функции, например, тождественный нуль, записать нельзя.
 
 		б) Через $\mathrm{MAJ}$ можно выразить $\land$:
@@ -155,12 +109,14 @@
 		\end{equation*}
 
 		а система связок из $\neg$ и $\land$ полна, следовательно, и данная система полна.
-	\end{section}
 
-	\begin{section}{Задача 6}
+
+	\begin{center}
+    \textbf{Задача 6}
+\end{center}
 		Обозначим $k = \floor{n/2} + 1$ -- минимальное количество переменных, которые должны быть единицами, чтобы $\mathrm{MAJ}$ обратилось в единицу.
 
-		\begin{subsection}{Оценка}
+		\textbf{Оценка}
 			Рассмотрим оптимальную ДНФ $F(x)$.
 
 			Очевидно, что в ней ни в одном мономе нет одновременно и переменной, и ее отрицания.
@@ -190,9 +146,8 @@
 			В оптимальном ДНФ для каждого множества $S \subseteq \{1, 2, \dots, n\}$ мощности ровно $k$ найдется моном, являющийся произведением переменных с этими номерами. В самом деле: в точке $x$, где $x_{S_1} = \dots = x_{S_k} = 1$, а все остальные переменные нулевые, должно исполняться $F(x) = 1$, следовательно, должен существовать моном, номера переменных которого образуют подмножество $S$; но каждый моном содержит минимум $k = \abs{S}$ переменных, поэтому этот моном будет состоять \textit{ровно} из этих переменных.
 
 			Итак, в оптимальном ДНФ минимум $\binom{n}{k}$ мономов, а в каждом мономе минимум $k$ литералов, следовательно, степень оптимального ДНФ не менее $k \binom{n}{k}$.
-		\end{subsection}
 
-		\begin{subsection}{Пример}
+		\textbf{Пример}
 			Пусть
 
 			\begin{equation*}
@@ -202,16 +157,17 @@
 			Легко видеть, что если среди переменных $x_1, x_2, \dots, x_n$ меньше $k$ единиц, то в каждом из множеств $S$ найдется нулевая переменная, поэтому $F$ обращается в ноль, и наоборот, если среди переменных $x_1, x_2, \dots, x_n$ как минимум $k$ единиц, при некотором $S$ (равном, например, множеству номеров первых $k$ единичных переменных) моном единичен, поэтому $F$ обращается в единицу.
 
 			Размер этой ДНФ $k \binom{n}{k}$, что совпадает с оценкой.
-		\end{subsection}
 
 		Ответ:
 
 		\begin{equation*}
 			\left( \floor{\frac{n}{2}} + 1 \right) \cdot \binom{n}{\floor{\frac{n}{2}} + 1}.
 		\end{equation*}
-	\end{section}
 
-	\begin{section}{Задача 7}
+
+	\begin{center}
+    \textbf{Задача 7}
+\end{center}
 		Да, можно.
 
 		Если среди переменных $x_1, x_2, \dots, x_n$ не все переменные единичны, то
@@ -227,5 +183,5 @@
 		\end{equation*}
 
 		а связка $\{\land, \neg\}$, как известна, полна. Следовательно, имея операции $\land$ и $\rightarrow$, можно построить выражение, совпадающее с данной функций всегда, кроме, возможно, случая $x_1 = x_2 = \dots = x_n = 1$. В этом случае построенное выражение всегда обращается в единицу, ведь $1 \land 1 = 1$ и $(1 \rightarrow 1) = 1$. Но нам гарантируется, что если все переменные единичны, то функция также принимает единичное значение, поэтому построение корректно.
-	\end{section}
-\end{document}
+
+

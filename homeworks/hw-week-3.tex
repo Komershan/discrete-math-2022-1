@@ -1,71 +1,19 @@
-% !TEX options=--shell-escape
-\documentclass{article}
-\usepackage{tikz,amsthm,amsmath,cancel,pgfplots,animate,multirow,unicode-math,adjustbox,booktabs,array,pst-solides3d,pst-all,pst-3dplot,color,colortbl}
-\usepackage[margin=96pt]{geometry}
+\subsection{Домашнее задание 3}
 
-\usetikzlibrary{automata,positioning,calc,decorations.pathmorphing,patterns,external}
-\tikzexternalize[prefix=external/]
 
-\newtheorem{problem}{Задача}
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{definition}{Определение}
-\newtheorem{example}{Пример}
-\renewcommand*{\proofname}{Доказательство}
-\newcommand{\const}{\mathrm{const}}
-\DeclareMathOperator{\ord}{ord}
-\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
-\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
-\newcommand{\fr}[1]{\left\{#1\right\}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-
-\newcolumntype{o}{>{\columncolor{orange}}c}
-
-\makeatletter
-\newenvironment{sqcases}{%
-	\matrix@check\sqcases\env@sqcases
-}{%
-	\endarray\right.%
-}
-\def\env@sqcases{%
-	\let\@ifnextchar\new@ifnextchar
-	\left\lbrack
-	\def\arraystretch{1.2}%
-	\array{@{}l@{\quad}l@{}}%
-}
-\makeatother
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\setmainfont{CMU Serif}
-\widowpenalties 1 10000
-\raggedbottom
-
-\date{24 сентября, 2022}
-\title{Дискретная математика \\ \Large Домашнее задание 3}
-\author{Иван Мачуговский}
-
-\AtBeginDocument{
-	\renewcommand{\setminus}{\mathbin{\backslash}}
-}
-
-\begin{document}
-	\maketitle
-
-	\begin{section}{Задача 1}
+	\begin{center}
+    \textbf{Задача 1}
+\end{center}
 		Выберем, на каких позициях будут стоять четные цифры, а на каких -- нечетные. После этого число определяется однозначно. Поэтому ответ
 
 		\begin{equation*}
 			\binom{10}{5} = \frac{10!}{(5!)^2} = 252.
 		\end{equation*}
-	\end{section}
 
-	\begin{section}{Задача 2}
+
+	\begin{center}
+    \textbf{Задача 2}
+\end{center}
 		Имеем $18$ черных карт и $18$ красных карт. Вероятность того, что первые две карты -- черные, а следующие две -- красные, равна
 
 		\begin{equation*}
@@ -77,9 +25,11 @@
 		\begin{equation*}
 			\binom{4}{2} \cdot \frac{18}{36} \cdot \frac{17}{35} \cdot \frac{18}{34} \cdot \frac{17}{33} = \frac{153}{385}.
 		\end{equation*}
-	\end{section}
 
-	\begin{section}{Задача 3}
+
+	\begin{center}
+    \textbf{Задача 3}
+\end{center}
 		Требуемое эквивалентно условию: первая цифра нечетна, среди следующих 6 цифр ровно две четны, и четные цифры не стоят рядом.
 
 		Число способов выбрать места для четных цифр так, чтобы они не стояли рядом, равно $\binom{6}{2} - 5$. После этого на каждой из позиций возможно по пять вариантов (поскольку первая цифра нечетна, число не будет начинаться с нуля). Итого
@@ -87,9 +37,11 @@
 		\begin{equation*}
 			\left( \binom{6}{2} - 5 \right) \cdot 5^7 = 781250.
 		\end{equation*}
-	\end{section}
 
-	\begin{section}{Задача 4}
+
+	\begin{center}
+    \textbf{Задача 4}
+\end{center}
 		Будем считать, что группы могут быть пустыми. Тогда каждый человек случайно равновероятно выбирает номер группы, к которой он присоединится.
 
 		Хоровод получается у всех трех елок, если в каждой группе ровно три человека. Способов разделить $9$ человек на группы по $3$, $3$ и $3$ будет
@@ -103,9 +55,11 @@
 		\begin{equation*}
 			1 - \frac{1680}{3^9} = \frac{6001}{6561}.
 		\end{equation*}
-	\end{section}
 
-	\begin{section}{Задача 5}
+
+	\begin{center}
+    \textbf{Задача 5}
+\end{center}
 		Докажем это по индукции по $n$.
 
 		База -- $n = 0$ и $n = 1$, тогда равенство тривиально.
@@ -123,9 +77,11 @@
 			[\text{т.к. при } k > (n-1)/2 \text{ значение 0}] = \sum_{0 \le k \le (n-1)/2} \binom{n-1-k}{k} + \sum_{0 \le k \le (n-2)/2} \binom{n-2-k}{k} = \\
 			= F_{n-1} + F_{n-2} = F_n. \qed
 		\end{multline*}
-	\end{section}
 
-	\begin{section}{Задача 6}
+
+	\begin{center}
+    \textbf{Задача 6}
+\end{center}
 		Чтобы было проще решать, усложним задачу: будем рассматривать более общий случай, когда требуется, чтобы числа были не нечетными, а не делились на некоторое простое $p$.
 
 		Обозначим за $\ord_p a$ степень вхождения $p$ в $a$. Тогда
@@ -144,14 +100,14 @@
 		Легко видеть, что $\floor{a} + \floor{b} \le \floor{a+b}$, поэтому $\ord_p \binom{n}{k} = 0$ тогда и только тогда, когда каждое слагаемое вида $\floor{a+b} - \floor{a} - \floor{b}$ равно нулю.
 
 		\begin{multline*}
-			\floor{a+b} = \floor{a} + \floor{b} \iff a+b - \fr{a+b} = a - \fr{a} + b - \fr{b} \iff \\
-			\iff \fr{a+b} = \fr{a} + \fr{b} \iff \fr{a} + \fr{b} < 1,
+			\floor{a+b} = \floor{a} + \floor{b} \Longleftrightarrow a+b - \fr{a+b} = a - \fr{a} + b - \fr{b} \Longleftrightarrow \\
+			\Longleftrightarrow \fr{a+b} = \fr{a} + \fr{b} \Longleftrightarrow \fr{a} + \fr{b} < 1,
 		\end{multline*}
 
 		то есть
 
 		\begin{equation*}
-			\forall m \ge 1: \fr{\frac{k}{p^m}} + \fr{\frac{n-k}{p^m}} < 1 \iff \forall m \ge 1: (k \bmod p^m) + ((n-k) \bmod p^m) < p^m.
+			\forall m \ge 1: \fr{\frac{k}{p^m}} + \fr{\frac{n-k}{p^m}} < 1 \Longleftrightarrow \forall m \ge 1: (k \bmod p^m) + ((n-k) \bmod p^m) < p^m.
 		\end{equation*}
 
 		Понятно, что если при всех $p^m \le n$ верно $n = -1 \pmod{p^m}$, то
@@ -186,9 +142,11 @@
 		Это означает, что число $n$ представляется в виде $n = a \cdot p^k - 1, \ 0 < a < p$ (эквивалентность в обе стороны легко проверяется формально).
 
 		В частном случае $p = 2$ получаем, что $n$ имеет вид $2^k - 1$.
-	\end{section}
 
-	\begin{section}{Задача 7}
+
+	\begin{center}
+    \textbf{Задача 7}
+\end{center}
 		Докажем, что если на доске из $n$ полей ведется игра, подобная описанной в условии, с $k$ фигурами, каждая из которых бьет не более $m$ полей, и $n \ge \frac{(2+(k+1)m)k}{2}$, то фигуры можно расставить так, чтобы они друг друга не били. В нашем частном случае $n = 10^4, k = m = 20$, и неравенство выполняется.
 
 		Доказывать утверждение будем по индукции по числу фигур $k$. При $k = 0$ утверждение тривиально верно.
@@ -204,14 +162,16 @@
 		\end{gather*}
 
 		в котором, по предположению индукции, корректная расстановка существует. Добавляя $k$-ю фигуру, получаем все еще корректную расстановку, поскольку по построению оставшиеся поля не бьют ее, а она не бьет оставшиеся поля. \qed
-	\end{section}
 
-	\begin{section}{Задача 8}
+
+	\begin{center}
+    \textbf{Задача 8}
+\end{center}
 		Назовем строку тяжелой, если в ней больше $\sqrt{n}$ единиц.
 
 		Рассмотрим данную нам таблицу. Пока в этой таблице есть тяжелая строка, будем делать следующее:
 
-		\begin{tabular}{|o|o|c|o|o|c|o|}
+		\begin{tabular}{|c|c|c|c|c|c|c|}
 			\hline
 			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
 			\hline
@@ -254,5 +214,5 @@
 		Поскольку каждый раз мы удаляли тяжелую строку, число столбцов уменьшалось каждый раз как минимум на $\sqrt{n}$, следовательно, всего операций могло произойти не больше, чем $\frac{n}{\sqrt{n}} = \sqrt{n}$. При каждой операции вычеркивались столбцы с суммой не более $2n$, поэтому всего вычеркнуто не более $2n \sqrt{n}$ единиц.
 
 		Итого, в изначальной таблице единиц было не более $3n \sqrt{n}$. \qed
-	\end{section}
-\end{document}
+
+

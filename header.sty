@@ -221,3 +221,36 @@
 
 
 \newcommand{\chara}{\operatorname{char}}
+
+\usepackage{tikz,amsthm,amsmath,cancel,pgfplots,animate,booktabs,array,pst-solides3d,pst-all,pst-3dplot,color,colortbl}
+\usetikzlibrary{automata,positioning,calc,decorations.pathmorphing,patterns,external}
+\tikzexternalize[prefix=external/]
+
+\renewcommand*{\proofname}{Доказательство}
+\newcommand{\const}{\mathrm{const}}
+
+\makeatletter
+\newenvironment{sqcases}{%
+	\matrix@check\sqcases\env@sqcases
+}{%
+	\endarray\right.%
+}
+\def\env@sqcases{%
+	\let\@ifnextchar\new@ifnextchar
+	\left\lbrack
+	\def\arraystretch{1.2}%
+	\array{@{}l@{\quad}l@{}}%
+}
+\makeatother
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\usepackage[english,russian]{babel} % локализация и переносы
+\widowpenalties 1 10000
+\raggedbottom
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\fr}[1]{\left\{#1\right\}}
+\DeclareMathOperator{\maj}{MAJ}
+\DeclarePairedDelimiterX\set[1]\lbrace\rbrace{\def\given{\;\delimsize\vert\;}#1}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}

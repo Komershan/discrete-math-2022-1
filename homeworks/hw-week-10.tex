@@ -1,65 +1,8 @@
-% !TEX options=--shell-escape
-\documentclass{article}
-\usepackage{tikz,amsthm,amsmath,cancel,pgfplots,animate,multirow,unicode-math,adjustbox,booktabs,array,pst-solides3d,pst-all,pst-3dplot,color,colortbl,braket,mathtools}
-\usepackage[margin=96pt]{geometry}
+\subsection{Домашнее задание 10}
 
-\usetikzlibrary{automata,positioning,calc,decorations.pathmorphing,patterns,external}
-\tikzexternalize[prefix=external/]
-
-\newtheorem{problem}{Задача}
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{definition}{Определение}
-\newtheorem{example}{Пример}
-\renewcommand*{\proofname}{Доказательство}
-\newcommand{\const}{\mathrm{const}}
-\DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\maj}{MAJ}
-\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
-\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
-\newcommand{\fr}[1]{\left\{#1\right\}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\continuum}{\mathfrak{c}}
-
-\newcolumntype{o}{>{\columncolor{orange}}c}
-
-\makeatletter
-\newenvironment{sqcases}{%
-	\matrix@check\sqcases\env@sqcases
-}{%
-	\endarray\right.%
-}
-\def\env@sqcases{%
-	\let\@ifnextchar\new@ifnextchar
-	\left\lbrack
-	\def\arraystretch{1.2}%
-	\array{@{}l@{\quad}l@{}}%
-}
-\makeatother
-
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
-\setmainfont{CMU Serif}
-\widowpenalties 1 10000
-\raggedbottom
-
-\date{21 ноября, 2022}
-\title{Дискретная математика \\ \Large Домашнее задание 10}
-\author{Иван Мачуговский}
-
-\AtBeginDocument{
-	\renewcommand{\setminus}{\mathbin{\backslash}}
-}
-
-\begin{document}
-	\maketitle
-
-	\section*{Задача 1}
+	\begin{center}
+    \textbf{Задача 1}
+\end{center}
 
 	а) Нет. В самом деле, если удалить из графа эту вершину степени $1$ и исходящее из нее ребро, останется граф из $7$ вершин и $22$ ребер. Но в графе из $7$ вершин может быть не более $\binom{7}{2} = 21$ ребер, противоречие.
 
@@ -158,7 +101,7 @@
 
 	\begin{gather*}
 		V = \set{0, 1, \dots, n-1}, \\
-		E = \Set{(i, (i+j) \bmod n) | 0 \le i < n, 1 \le j \le \frac{k}{2}}.
+		E = \set{(i, (i+j) \bmod n) | 0 \le i < n, 1 \le j \le \frac{k}{2}}.
 	\end{gather*}
 
 	Это определение корректно, потому что каждое ребро здесь указано только один раз. В самом деле, две пары
@@ -308,4 +251,4 @@
 	Предположим для начала, что $\abs{E} = n$. Тогда к множеству $E$ применимо свойство из условия задачи, и найдется вершина $f \not\in E$, связанная со всеми вершинами из $E$. $f$, очевидно, лежит в некотором $F_i$. Но мы знаем, что в графе-дополнении $f$ связана с какой-то вершиной $e \in E_i$, то есть $f$ не может быть связана со всеми вершинами из $E$. Противоречие.
 
 	Если $\abs{E} < n$, то перекинем $n - \abs{E}$ вершин из $F$ в $E$. Заметим, что конструкция из предыдущего абзаца не ломается. В самом деле, поскольку из $F$ мы вершины только убирали, $f$ все еще лежит в некотором $F_i$. Поскольку в $E$ вершины только добавлялись, то $e$ все еще будет лежать в соответствующем $E_i$. 
-\end{document}
+

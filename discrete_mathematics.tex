@@ -41,12 +41,13 @@
 	}
 	\newpage
 	\section{Домашние задания}{
-		%\foreach \i in {1,...,11} {
-		%	\edef\FileName{proofs/question\i}%
-		%	\IfFileExists{\FileName}{%
-		%		\input{\FileName}%
-		%	}
-		%}
+		\foreach \i in {1,...,11} {
+			\edef\FileName{homeworks/hw-week-\i}%
+			\IfFileExists{\FileName}{%
+				\input{\FileName}%
+				\newpage%
+			}
+		}
 	}
 	
 \end{document}
