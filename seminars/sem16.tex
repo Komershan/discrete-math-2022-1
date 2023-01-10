@@ -1,0 +1,112 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{longtable}
+\usepackage[unicode=true, colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{graphicx}%Вставка картинок правильная
+\usepackage{float}%Плавающие картинки
+\usepackage{wrapfig}%Обтекание фигур (таблиц, картинок и прочего)
+
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\N} {\mathbb{N}}
+\newcommand{\Z} {\mathbb{Z}}
+\newcommand{\R} {\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\linf}[2]{\lim\limits_{#1 \to #2}}
+\newcommand{\LLim}[2]{\mathop{\underline{\lim}}\limits_{#1 \rightarrow #2}}
+\newcommand{\HLim}[2]{\mathop{\overline{\lim}}\limits_{#1 \rightarrow #2}}
+\newcommand{\supremum}[2]{\sup\limits_{#1 \in #2}}
+\newcommand{\infinum}[2]{\inf\limits_{#1 \in #2}}
+\newcommand{\Sum}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\task}[1]{\section*{Задание #1}}
+\newcommand{\subtask}[1]{\subsection*{Пункт #1}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\widowpenalties 1 10000
+\raggedbottom
+
+\begin{document}
+
+\task{1}
+
+$\chi_{C_n}(x)$ - количество способов правильно раскрасить $C_n$ в $x$ цветов.
+
+Если в $G$ удалить ребро, то $\chi_{G - uv} (k)= \chi_{G}(k) + \chi_{G \cdot uv}(k)$. Когда мы сжимаем ребро, получаем цикл на один меньше, когда
+убираем ребро, получаем дерево, тогда для дерева хроматический многочлен равен $\chi_T(x) = x(x - 1)^{n - 1}$, тогда получим рекуренту.
+
+$$\chi_{C_n} (x) = x(x - 1)^{n - 1} - \chi_{C_{n - 1}} = x(x - 1)^{n - 1} - x(x - 1)^{n - 2} + ... + (-1)^n \cdot \chi_{P_2}(x)$$
+
+$$\chi_{C_n} (x) = x \cdot \Sum{k = 1}{n - 1} (-1)^{n - k - 1}(x - 1)^k = (-1)^{n}x(x - 1) \cdot \Sum{k = 0}{n - 2} (x - 1)^k (-1)^k$$
+
+$$\chi_{C_n} (x) = \frac{(x - 1)^{n - 1} - 1}{1 - x - 1} \cdot x (x - 1) (-1)^{n} = (1 - (1 - x)^{n - 1})(x - 1)(- 1)^{n}$$
+
+$$\chi_{C_n} (x) = (x - 1)^n + (-1)^n(x - 1)$$
+
+\task{2}
+
+$$x(x - 1)^{n - 1} = x^n - (x - 1)\cdot x^{n - 1} + ... + (-1)^{n - 1}x$$
+
+Значит у нас $n - 1$ ребро и 1 компонента связности, тогда этот гра дерево, доказано.
+
+\task{3}
+
+$f$ - число элементов в $S_p$. Пусть $g_i = \begin{cases}
+    1, i \in S_p\\
+    0, else
+\end{cases}$
+
+$$f = \Sum{i = 1}{n} = g_i$$
+
+$$Ef = \Sum{i = 1}{n} = g_i = n \cdot p$$
+
+\task{4}
+
+$a$ - строка, $a \in B^n = \{0, 1\}^n$, C - наше подмножество
+
+каждая строка с вероятностью $\frac{1}{2}$ входит в случайное подмножество.
+
+Суммарное число единиц во всех строках равно $\frac{2^n}{2} n$, так как каждую строку можно сопоставить парой с обратной ей, у них в сумме $n$ единиц,
+таких пар всего $\frac{2^n}{2}$. Пусть $\#a$ - количество единиц
+
+$$Ef = \Sum{a \in B}{} P(a \in С) \cdot \#a = \Sum{a \in B}{} \frac{1}{2} \#a = \frac{1}{2} \cdot \frac{2^n}{2} n = 2^{n - 2} \cdot n$$
+
+Пункт б
+
+Выбрать упорядоченно различных $k$ строк
+
+$$f = \Sum{i = 1...k, j = 1...n}{} g_{ij}, Eg_{ij} = P(\text{в ячейке (i, j) стоит 1}) = \frac{1}{2}$$
+
+$$Ef = \frac{kn}{2}$$
+
+\task{5}
+
+\task{6}
+
+\task{7}
+
+Воспользуемся неравенством Чебышёва.
+
+Пусть $f$ - количество единиц в строке, $Ef = \frac{n}{2}$
+
+$$P(|f - \frac{n}{2} \geq \sqrt{n}|) \leq \frac{Df}{n}$$
+
+$$Df = E(f^2) - (Ef)^2 = E(f^2) - \frac{n^2}{4}$$
+
+$$E(f^2) = (g_1 + ... + g_n)^2 = \Sum{i = 1}{n} g_i^2 + 2 \Sum{i < j}{} g_i \cdot g_j = f + 2 \Sum{i < j}{} g_i g_j =$$
+
+$$Ef + 2 \Sum{i < j}{} E g_i g_j = \frac{n}{2} + 2 \cdot \frac{n(n - 1)}{2} \cdot \frac{1}{4} = \frac{n}{2} + \frac{n(n - 1)}{4}$$
+
+$$Df = \frac{n}{2} + \frac{n(n - 1)}{4} - \frac{n^2}{4} = \frac{n}{4}$$
+
+$$P(|f - \frac{n}{2} \geq \sqrt{n}|) \leq \frac{\frac{n}{4}}{n} = \frac{1}{4}$$
+
+\end{document}
